@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端适应-->
+    <meta name="viewport" content="width=device-width , inital-scale=1.0">
+    <title>数据处理</title>
+
+    <!--CDN版本,不需要下载-->
+    <!--链接semantic UI-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+
+</head>
+<body>
+
+<!--导航-->
+<!--inverted:反转.会变成黑色-->
+<nav  class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--stackable 适应移动端-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item" style="font-family: STSong">统计结果输出</h2>
+
+        </div>
+    </div>
+
+</nav>
+
+
+<!--中间内容-->
+<div class="m-padded-tb-big m-container-small">
+    <div class="ui container">
+
+        <!--密码提示-->
+        <div class="ui mini teal message">处理之后的表单</div>
+
+        <!--错误提示-->
+        <div class="ui error message" th:if="${message}">
+            <h2 th:text="${message}"/>
+        </div>
+
+        <div class="ui segment basic" id="table-container">
+            <table class="ui celled table">
+                <thead>
+                <tr align="center">
+                    <th></th>
+                    <th>名字</th>
+                    <th>团队</th>
+                    <th>总预收款</th>
+<!--                    <th>操作</th>-->
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr align="center" th:each="user,iterStat : ${users}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${user.user_name}">名字</td>
+                    <td th:text="${user.user_team}">团队</td>
+                    <td th:text="${user.user_money}">12356</td>
+<!--                    <td>-->
+<!--                        <a href="#" onclick="return confirm('确定要删除吗？')" class="ui mini orange basic button">移除</a>-->
+<!--                    </td>-->
+                </tr>
+                </tbody>
+
+<!--                <tfoot>-->
+<!--                <tr>-->
+<!--                    &lt;!&ndash;合并单元格&ndash;&gt;-->
+<!--                    <th colspan="6">-->
+<!--                        <div class="ui inverted divided stackable grid">-->
+<!--                            <div class="three wide column" align="center">-->
+<!--                                <a class="ui left floated teal basic button">上一页</a>-->
+<!--                            </div>-->
+
+<!--                            <div class="ten wide column" align="center">-->
+<!--                                <p>第 <span></span> 页，共 <span></span> 页，有 <span></span> 名学生</p>-->
+<!--                            </div>-->
+
+<!--                            <div class="three wide column" align="center">-->
+<!--                                <a class="ui right floated teal basic button">下一页</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </th>-->
+<!--                </tr>-->
+<!--                </tfoot>-->
+            </table>
+
+        </div>
+        <form action="#" th:action="@{/admin/students/addMany}"
+              method="post" class="ui form">
+
+            <input type="hidden" name="users" th:value="*{users}">
+
+            <div class="ui right aligned container">
+                <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui teal submit button">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<!--CDN版本,不需要下载-->
+<!--连接jsdeliver-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--链接semantic UI-->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<!--对头菜单移动端的应用-->
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+
+</script>
+</body>
+</html>

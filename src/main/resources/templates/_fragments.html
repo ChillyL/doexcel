@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--公共调用-->
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!--其他页面调用即可替换head，还可以传参-->
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <!--移动端适应-->
+    <meta name="viewport" content="width=device-width , inital-scale=1.0">
+
+    <title th:replace="${title}">标题</title>
+
+    <!--CDN版本,不需要下载-->
+    <!--链接semantic UI-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+
+</head>
+<body>
+
+<!--导航-->
+<!--inverted:反转.会变成黑色-->
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small ">
+    <div class="ui container">
+
+        <!--stackable 适应移动端-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item" style="font-family: STSong">考试系统</h2>
+            <a href="#" th:href="@{/admin/teachers}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="user icon"></i>教师管理</a>
+            <a href="#" th:href="@{/admin/students}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="user outline icon"></i>学生管理</a>
+            <a href="#" th:href="@{/admin/exams}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>考试管理</a>
+
+            <!--头像-->
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="https://picsum.photos/id/1/100/100" th:src="@{https://picsum.photos/id/1/100/100}" alt=""
+                             class="ui avatar image">
+                        <span th:text="${session.admin.admin_nickname}">管理员</span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/admin/logout}" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--移动端的列表按钮  toggle black无显示意义，只用于类似id作用-->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+
+<th:block th:fragment="script">
+
+    <!--CDN版本,不需要下载-->
+    <!--连接jsdeliver-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <!--链接semantic UI-->
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+</th:block>
+
+
+</body>
+</html>
